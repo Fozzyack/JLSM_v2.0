@@ -5,7 +5,7 @@ import LogoutBtn from "./LogoutBtn";
 import NavbarLinks from "./Links";
 import { ExtendedSession } from "@/types/authtypes";
 import { SessionContext } from "@/hooks/session";
-
+import { motion } from "framer-motion";
 const NavbarWrapper = ({ session }: { session: ExtendedSession }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -56,11 +56,14 @@ const NavbarWrapper = ({ session }: { session: ExtendedSession }) => {
         )}
       </button>
       {open && (
-        <div className="fixed mx-4 h-[70%] p-4  w-[200px] rounded-xl bg-white z-10 flex flex-col items-center justify-between border border-black shadow-xl  md:hidden">
+        <motion.div 
+        initial={{ x: -1000 }}
+        animate={{ x: 0 }}
+        className="fixed mx-4 h-[70%] p-4  w-[50%] rounded-xl bg-white z-10 flex flex-col items-center justify-between shadow-xl  md:hidden">
             <Logo />
             <NavbarLinks />
             <LogoutBtn />
-        </div>
+        </motion.div>
       )}
     </SessionContext.Provider>
   );

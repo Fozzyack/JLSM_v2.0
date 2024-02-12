@@ -23,7 +23,7 @@ const Classmates = () => {
     <div className="flex flex-col gap-4">
       <h1 className="text-center md:text-start text-2xl">Classmates</h1>
 
-      <div className="overflow-x-auto p-4 rounded-xl border border-slate-300">
+      <div className="overflow-x-auto p-4 rounded-xl border border-slate-300 transition ease-in-out duration-500 hover:bg-white hover:shadow-lg">
         <table className="min-w-full divide-y divide-gray-300">
           <thead>
             <tr>

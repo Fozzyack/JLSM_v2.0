@@ -21,7 +21,7 @@ const UsersTable = () => {
     fetchUsers();
   }, []);
   return (
-    <div className="p-4 rounded-xl border border-slate-300 overflow-x-auto">
+    <div className="bg-white shadow p-4 rounded-xl border border-slate-300 overflow-x-auto">
       <table className="min-w-full divide-y divide-gray-300">
         <thead>
           <tr>

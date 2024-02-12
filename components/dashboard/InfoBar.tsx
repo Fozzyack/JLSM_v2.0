@@ -19,7 +19,7 @@ const InfoBar = ({ session }: { session: ExtendedSession }) => {
   }, []);
 
   return (
-    <div className="flex flex-row py-3 px-4 items-center justify-between bg-gradient-to-r from-yellow-500 to-yellow-400 text-white rounded-xl">
+    <div className="flex shadow-lg flex-row py-3 px-4 items-center justify-between bg-gradient-to-r from-yellow-500 to-yellow-400 text-white rounded-xl">
       <span>${balance / 100}</span>
       <ProfileSection session={session}/>
     </div>
