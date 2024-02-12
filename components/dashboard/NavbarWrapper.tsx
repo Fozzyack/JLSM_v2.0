@@ -59,7 +59,8 @@ const NavbarWrapper = ({ session }: { session: ExtendedSession }) => {
         <motion.div 
         initial={{ x: -1000 }}
         animate={{ x: 0 }}
-        className="fixed mx-4 h-[70%] p-4  w-[50%] rounded-xl bg-white z-10 flex flex-col items-center justify-between shadow-xl  md:hidden">
+        transition={{stiffness: 170}}
+        className="fixed  h-[70%] p-4  w-[90px] rounded-xl bg-white z-10 flex flex-col items-center justify-between shadow-xl  md:hidden">
             <Logo />
             <NavbarLinks />
             <LogoutBtn />
