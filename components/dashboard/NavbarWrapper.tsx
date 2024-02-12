@@ -13,7 +13,7 @@ const NavbarWrapper = ({ session }: { session: ExtendedSession }) => {
   };
   return (
     <SessionContext.Provider value={session}>
-      <div className="fixed h-screen hidden md:flex flex-col justify-between items-center py-10 w-[200px]">
+      <div className="fixed h-screen hidden md:flex flex-col justify-between items-center py-10 w-[250px]">
         <Logo />
         <NavbarLinks />
         <LogoutBtn />
