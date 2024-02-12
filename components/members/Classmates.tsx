@@ -3,6 +3,7 @@ import { Classmate } from "@/types/userconteacttypes";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import Role from "./Role";
+import GradeBadge from "./GradeBadge";
 
 const Classmates = () => {
   const [classmates, setClassmates] = useState<Classmate[]>([]);
@@ -19,7 +20,7 @@ const Classmates = () => {
     fetchClassmates();
   }, []);
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-4">
       <h1 className="text-center md:text-start text-2xl">Classmates</h1>
 
       <div className="overflow-x-auto p-4 rounded-xl border border-slate-300">
@@ -43,6 +44,12 @@ const Classmates = () => {
                 className="text-start text-xs font-medium text-gray-500 uppercase"
               >
                 Email
+              </th>
+              <th
+                scope="col"
+                className="text-start text-xs font-medium text-gray-500 uppercase"
+              >
+                Grade 
               </th>
               <th
                 scope="col"
@@ -71,6 +78,9 @@ const Classmates = () => {
                 </td>
                 <td className="text-sm font-medium text-gray-900 ">
                   {classmate.email}
+                </td>
+                <td className="text-sm font-medium text-gray-900 ">
+                    <GradeBadge grade={classmate.grade} difficulty={classmate.difficulty} />
                 </td>
                 <td className="text-sm font-medium text-gray-900 ">
                   <Role privilege={0} place={1} />

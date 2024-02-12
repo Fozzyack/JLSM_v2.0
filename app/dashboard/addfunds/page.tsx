@@ -1,15 +1,14 @@
-"use client";
-import CheckoutForm from "@/components/checkout/CheckoutForm";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
+'use client';
+import ChooseFunds from '@/components/funds/AddMoney';
+import React from 'react';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-const AddFundsPage = () => {
+const AddFunds = () => {
     return (
-        <Elements stripe={stripePromise}>
-            <CheckoutForm/>
-        </Elements>
+        <div className="flex flex-col items-center justify-center gap-4 w-full h-full">
+            <p> The new way to pay your tutors </p>
+            <ChooseFunds />
+        </div>
     );
-    }
+};
 
-export default AddFundsPage;
+export default AddFunds;

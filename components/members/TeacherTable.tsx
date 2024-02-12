@@ -3,6 +3,7 @@ import { TeacherContact } from "@/types/userconteacttypes";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import Role from "./Role";
+import GradeBadge from "./GradeBadge";
 
 const TeacherTable = () => {
   const [teachers, setTeachers] = useState<TeacherContact[]>([]);
@@ -47,6 +48,12 @@ const TeacherTable = () => {
               </th>
               <th
                 scope="col"
+                className="text-start text-xs font-medium text-gray-500 uppercase"
+              >
+                Grade
+              </th>
+              <th
+                scope="col"
                 className="text-end text-xs font-medium text-gray-500 uppercase"
               >
               Role
@@ -73,6 +80,9 @@ const TeacherTable = () => {
                 </td>
                 <td className="text-sm font-medium text-gray-900">
                   {teacher.email}
+                </td>
+                <td className="text-sm font-medium text-gray-900">
+                    <GradeBadge grade={teacher.grade} difficulty={teacher.difficulty}/>
                 </td>
                 <td > 
                     <Role privilege={teacher.privilege} place={1}/>

@@ -13,5 +13,6 @@ export interface ExtendedUser extends AdapterUser {
     email: string,
     privilege: number, 
     verified: boolean
+    grade_id: number
 }
  

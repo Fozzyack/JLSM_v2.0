@@ -100,7 +100,7 @@ const UsersTable = () => {
                   <Role privilege={user.privilege} place={0} />
               </td>
               <td className="py-4 whitespace-nowrap text-gray-500">
-                <VerifyUser id={user.id} verified={user.verified} /> 
+                <VerifyUser id={parseInt(user.id)} verified={user.verified} /> 
               </td>
               <td className="py-4 whitespace-nowrap">
                 <EditModal user={user}/>

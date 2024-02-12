@@ -17,7 +17,7 @@ export const GET = async (req: Request) => {
                 SELECT u.id, name, verified, email, image, privilege, balance FROM users u
                 JOIN balances bal 
                 ON u.id=bal.user_id
-                WHERE u.id != $1
+                WHERE u.id != $1 AND u.privilege < 3
             `;
     const result = await pool.query(sql, [session.user.id]);
     return Response.json(result.rows);
@@ -48,9 +48,35 @@ export const PUT = async (req: Request) => {
             SET balance = $1
             WHERE user_id = $2
         `;
+    const getPrevBalanceSql = `
+            SELECT balance FROM balances
+            WHERE user_id = $1
+            RETURNING balance;
+    `;
+    
+    const prevBalance = (await pool.query(getPrevBalanceSql, [id])).rows[0].balance;
 
-    await pool.query(updateUserSql, [name, privilege, id]);
-    await pool.query(updateBalanceSql, [balance * 100, id]);
+    const client = await pool.connect();
+    try {
+      await client.query("BEGIN");
+      await client.query(updateUserSql, [name, privilege, id]);
+      await client.query(updateBalanceSql, [
+        balance * 100,
+        id,
+      ]);
+      if (prevBalance !== balance * 100 ) {
+          const transactionSql = `
+            INSERT INTO  transactions (user_id, amount, manual_update_user_id, prev_balance, new_balance) VALUES
+            ($1, $2, $3, $4, $5)
+          `
+          await client.query(transactionSql, [id, balance * 100 - prevBalance, session.user.id, prevBalance, balance * 100])
+      }
+      await client.query("COMMIT");
+    } catch (error: any) {
+      await client.query("ROLLBACK");
+      throw new Error(error.message);
+    }
+
     return Response.json(session);
   } catch (error: any) {
     console.log(error.message);

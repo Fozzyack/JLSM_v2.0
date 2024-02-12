@@ -12,7 +12,10 @@ export const GET = async (req: Request) => {
       );
 
     const sql = `
-            SELECT name, email, image, privilege FROM users where privilege >= 1
+            SELECT u.name as name, u.email, u.image, u.privilege, g.name as grade, g.difficulty FROM users u
+            JOIN grades g
+            ON g.id = u.grade_id
+            WHERE privilege >= 1 AND verified = true
         `;
 
     const result = await pool.query(sql);
