@@ -13,12 +13,14 @@ const TimeSlot = ({ timeslot, date }: { timeslot: number; date: Date }) => {
     const user = getSessionContext().user;
 	return (
 		<Fragment>
+            <div className="w-full h-full">
 			<button
 				onClick={toggleModal}
-				className="flex h-full w-full hover:animate-pulse flex-col text-white  items-center text-center justify-center"
+				className="w-full h-full text-white"
 			>
 				<TimeslotClasses timeslot={timeslot} date={date} />
 			</button>
+            </div>
 
 			{modalOpen && (
 				<div className="bg-black left-0 normal-case top-0 p-4 bg-opacity-40 fixed w-full h-screen flex flex-col items-center justify-center">

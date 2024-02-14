@@ -35,11 +35,11 @@ const WeeklyTimeTable = ({
 	return (
 		<SessionContext.Provider value={session}>
 			<div className="w-full h-full p-4 border overflow-x-auto rounded-xl border-slate-300">
-				<table className="w-full h-full border-b border-slate-300 divide-y divide-slate-300">
+				<table className="w-full border-b border-slate-300 divide-y divide-slate-300">
 					<thead>
 						<tr>
 							<th className="text-center text-xs font-medium text-gray-500 uppercase"></th>
-							<th className="text-center text-xs font-medium text-gray-500 uppercase">
+							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
 								<p>Monday</p>
 								<p>
 									{handleDateChange(
@@ -48,7 +48,7 @@ const WeeklyTimeTable = ({
 									).toLocaleDateString("en-AU")}
 								</p>
 							</th>
-							<th className="text-center text-xs font-medium text-gray-500 uppercase">
+							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
 								<p>Tuesday</p>
 								<p>
 									{handleDateChange(
@@ -57,7 +57,7 @@ const WeeklyTimeTable = ({
 									).toLocaleDateString("en-AU")}
 								</p>
 							</th>
-							<th className="text-center text-xs font-medium text-gray-500 uppercase">
+							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
 								<p>Wednesday</p>
 								<p>
 									{handleDateChange(
@@ -66,7 +66,7 @@ const WeeklyTimeTable = ({
 									).toLocaleDateString("en-AU")}
 								</p>
 							</th>
-							<th className="text-center text-xs font-medium text-gray-500 uppercase">
+							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
 								<p>Thursday</p>
 								<p>
 									{handleDateChange(
@@ -75,7 +75,7 @@ const WeeklyTimeTable = ({
 									).toLocaleDateString("en-AU")}
 								</p>
 							</th>
-							<th className="text-center text-xs font-medium text-gray-500 uppercase">
+							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
 								<p>Friday</p>
 								<p>
 									{handleDateChange(
@@ -84,7 +84,7 @@ const WeeklyTimeTable = ({
 									).toLocaleDateString("en-AU")}
 								</p>
 							</th>
-							<th className="text-center text-xs font-medium text-gray-500 uppercase">
+							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
 								<p>Saturday</p>
 								<p>
 									{handleDateChange(
@@ -93,7 +93,7 @@ const WeeklyTimeTable = ({
 									).toLocaleDateString("en-AU")}
 								</p>
 							</th>
-							<th className="text-center text-xs font-medium text-gray-500 uppercase">
+							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
 								<p>Sunday</p>
 								<p>
 									{handleDateChange(
@@ -119,7 +119,7 @@ const WeeklyTimeTable = ({
 										)}
 									/>
 								</td>
-								<td className="text-center border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
+								<td className="text-center  border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
 									<TimeSlot
 										timeslot={index}
 										date={handleDateChange(
