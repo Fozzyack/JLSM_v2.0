@@ -1,5 +1,6 @@
 
 export type TeacherContact = {
+    id: string
     name: string | undefined | null,
     email: string,
     image: string | undefined | null,

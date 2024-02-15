@@ -1,11 +1,13 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import TimeslotClasses from "./TimeslotClasses";
 import { motion } from "framer-motion";
 import { getSessionContext } from "@/hooks/session";
+import { TeacherContact } from "@/types/userconteacttypes";
 
 const TimeSlot = ({ timeslot, date }: { timeslot: number; date: Date }) => {
 	const [modalOpen, setModalOpen] = useState(false);
+    const [teachers, setTeachers] = useState<TeacherContact[]>([]);
 
 	const toggleModal = () => {
 		setModalOpen(!modalOpen);
@@ -27,7 +29,19 @@ const TimeSlot = ({ timeslot, date }: { timeslot: number; date: Date }) => {
             console.log(error.message)
         }
     }
-    const user = getSessionContext().user;
+    useEffect(() => {
+        const fetchTeachers = async () => {
+            try {
+                const res = await fetch('/api/teachers')
+                if(!res.ok) throw new Error("Failed to fetch teachers")
+                const data = await res.json()
+                setTeachers(data)
+            } catch(error: any) {
+                console.log(error.message)
+            }
+        }
+        fetchTeachers()
+    }, [])
 	return (
 		<Fragment>
             <div className="w-full h-full">
@@ -55,7 +69,13 @@ const TimeSlot = ({ timeslot, date }: { timeslot: number; date: Date }) => {
                             </button>
 						</div>
                         <div className="flex flex-col items-center justify-center">
-                            <p> Nothing yet </p>
+                           <label className="text-slate-500">Teacher</label>
+                            <select className="p-2 w-full">
+                                {teachers.map(teacher => (
+                                    <option key={teacher.id} value={teacher.id}>{teacher.name}</option>
+                                ))}
+                            </select>
+
                             <button onClick={submitClass} className="text-white bg-slate-400 p-2">
                                 Add Class
                             </button>
