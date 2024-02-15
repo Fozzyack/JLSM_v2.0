@@ -10,6 +10,23 @@ const TimeSlot = ({ timeslot, date }: { timeslot: number; date: Date }) => {
 	const toggleModal = () => {
 		setModalOpen(!modalOpen);
 	};
+    const submitClass = async () => {
+        try {
+            const res = await fetch('/api/class', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    timeslot,
+                    date
+                })})
+            if(!res.ok) throw new Error("Failed to add class")
+            const data = await res.json()
+        } catch(error: any) {
+            console.log(error.message)
+        }
+    }
     const user = getSessionContext().user;
 	return (
 		<Fragment>
@@ -37,6 +54,12 @@ const TimeSlot = ({ timeslot, date }: { timeslot: number; date: Date }) => {
                                 X
                             </button>
 						</div>
+                        <div className="flex flex-col items-center justify-center">
+                            <p> Nothing yet </p>
+                            <button onClick={submitClass} className="text-white bg-slate-400 p-2">
+                                Add Class
+                            </button>
+                        </div>
 					</motion.div>
 				</div>
 			)}

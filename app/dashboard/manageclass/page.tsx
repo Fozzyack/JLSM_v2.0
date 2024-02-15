@@ -25,6 +25,7 @@ const getWeekDays = () => {
 };
 const ManageClass = async () => {
 	const weekDays = getWeekDays();
+    console.log(weekDays)
     const session = await getServerSession(options) as ExtendedSession
     if(session.user.privilege < 1) return redirect('/dashboard')
 	return (

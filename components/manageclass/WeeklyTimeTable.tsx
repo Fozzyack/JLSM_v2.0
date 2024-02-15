@@ -18,7 +18,16 @@ const TIMES = [
 	"18:00 - 19:00",
 	"19:00 - 20:00",
 	"20:00 - 21:00",
-	"21:00 - 22:00",
+];
+
+const DAYS = [
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+	"Sunday",
 ];
 
 function handleDateChange(date: Date, factor: number) {
@@ -34,147 +43,72 @@ const WeeklyTimeTable = ({
 	const [dateOffset, setDateOffset] = useState(0);
 	return (
 		<SessionContext.Provider value={session}>
+			<div className="flex flex-row mb-4 justify-between items-center">
+				<button
+					onClick={() => setDateOffset(dateOffset - 1)}
+					className="text-white bg-slate-400 p-2 rounded-md"
+				>
+					Previous
+				</button>
+				<h3 className="text-slate-500 text-lg font-semibold">
+					Weekly Timetable
+				</h3>
+				<button
+					onClick={() => setDateOffset(dateOffset + 1)}
+					className="text-white bg-slate-400 p-2 rounded-md"
+				>
+					Next
+				</button>
+			</div>
 			<div className="w-full h-full p-4 border overflow-x-auto rounded-xl border-slate-300">
-				<table className="w-full border-b border-slate-300 divide-y divide-slate-300">
+				<table className="w-full divide-y divide-slate-300 border-b border-slate-300">
 					<thead>
 						<tr>
-							<th className="text-center text-xs font-medium text-gray-500 uppercase"></th>
-							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
-								<p>Monday</p>
-								<p>
-									{handleDateChange(
-										weekdays[0],
-										dateOffset,
-									).toLocaleDateString("en-AU")}
-								</p>
-							</th>
-							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
-								<p>Tuesday</p>
-								<p>
-									{handleDateChange(
-										weekdays[1],
-										dateOffset,
-									).toLocaleDateString("en-AU")}
-								</p>
-							</th>
-							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
-								<p>Wednesday</p>
-								<p>
-									{handleDateChange(
-										weekdays[2],
-										dateOffset,
-									).toLocaleDateString("en-AU")}
-								</p>
-							</th>
-							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
-								<p>Thursday</p>
-								<p>
-									{handleDateChange(
-										weekdays[3],
-										dateOffset,
-									).toLocaleDateString("en-AU")}
-								</p>
-							</th>
-							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
-								<p>Friday</p>
-								<p>
-									{handleDateChange(
-										weekdays[4],
-										dateOffset,
-									).toLocaleDateString("en-AU")}
-								</p>
-							</th>
-							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
-								<p>Saturday</p>
-								<p>
-									{handleDateChange(
-										weekdays[5],
-										dateOffset,
-									).toLocaleDateString("en-AU")}
-								</p>
-							</th>
-							<th className="py-4 text-center text-xs font-medium text-gray-500 uppercase">
-								<p>Sunday</p>
-								<p>
-									{handleDateChange(
-										weekdays[6],
-										dateOffset,
-									).toLocaleDateString("en-AU")}
-								</p>
-							</th>
+							<th></th> {/* Empty cell */}
+							{weekdays.map((date, index) => {
+								return (
+									<th key={index} className="">
+										<div className="flex flex-col p-4 text-slate-400 text-xs uppercase">
+											<p>{DAYS[index]}</p>
+											<p className="text-center">
+												{handleDateChange(
+													date,
+													dateOffset,
+												).toLocaleDateString("en-AU", {
+													timeZone: "UTC",
+												})}
+											</p>
+										</div>
+									</th>
+								);
+							})}
 						</tr>
 					</thead>
-					<tbody className="divide-y divide-slate-300">
-						{TIMES.map((time, index) => (
-							<tr key={index}>
-								<td className="text-center border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
-									{time}
-								</td>
-								<td className="text-center border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
-									<TimeSlot
-										timeslot={index}
-										date={handleDateChange(
-											weekdays[0],
-											dateOffset,
-										)}
-									/>
-								</td>
-								<td className="text-center  border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
-									<TimeSlot
-										timeslot={index}
-										date={handleDateChange(
-											weekdays[0],
-											dateOffset,
-										)}
-									/>
-								</td>
-								<td className="text-center border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
-									<TimeSlot
-										timeslot={index}
-										date={handleDateChange(
-											weekdays[0],
-											dateOffset,
-										)}
-									/>
-								</td>
-								<td className="text-center border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
-									<TimeSlot
-										timeslot={index}
-										date={handleDateChange(
-											weekdays[0],
-											dateOffset,
-										)}
-									/>
-								</td>
-								<td className="text-center border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
-									<TimeSlot
-										timeslot={index}
-										date={handleDateChange(
-											weekdays[0],
-											dateOffset,
-										)}
-									/>
-								</td>
-								<td className="text-center border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
-									<TimeSlot
-										timeslot={index}
-										date={handleDateChange(
-											weekdays[0],
-											dateOffset,
-										)}
-									/>
-								</td>
-								<td className="text-center border-r border-slate-300 text-xs font-medium text-gray-500 uppercase">
-									<TimeSlot
-										timeslot={index}
-										date={handleDateChange(
-											weekdays[0],
-											dateOffset,
-										)}
-									/>
-								</td>
-							</tr>
-						))}
+					<tbody className="divide-y divide-slate-400">
+						{TIMES.map((time, index) => {
+                            const timeslot = index;
+							return (
+								<tr key={index}>
+									<td className="text-slate-400 text-xs uppercase border-r border-slate-400">
+										{time}
+									</td>
+									{weekdays.map((date, index) => (
+										<td
+											key={index}
+											className="border border-r border-slate-300"
+										>
+											<TimeSlot
+												timeslot={timeslot}
+												date={handleDateChange(
+													date,
+													dateOffset,
+												)}
+											/>
+										</td>
+									))}
+								</tr>
+							);
+						})}
 					</tbody>
 				</table>
 			</div>
