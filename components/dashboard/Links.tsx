@@ -92,7 +92,7 @@ const LINKS = [
 	{
 		name: "Classes",
 		href: "/dashboard/manageclass",
-		req_priv: 1,
+		req_priv: 2,
 		svg: (
 			<svg
 				className="w-6 h-6 "
