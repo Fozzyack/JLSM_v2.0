@@ -14,5 +14,6 @@ export interface ExtendedUser extends AdapterUser {
     privilege: number, 
     verified: boolean
     grade_id: number
+    colour: string
 }
  

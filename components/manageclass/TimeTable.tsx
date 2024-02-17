@@ -3,8 +3,10 @@ import { ExtendedSession } from "@/types/authtypes";
 import React, { useEffect, useState } from "react";
 import TableTitleAndButtons from "./TableTitleAndButtons";
 import { SessionContext } from "@/hooks/session";
-import AddClass from "./SearchAndAddClass";
 import SearchAndAddClass from "./SearchAndAddClass";
+import SelectDate from "./SelectDate";
+import { CalendarContext } from "@/hooks/Calendar";
+import AddOrEditClassModal from "./AddOrEditClassModal";
 
 const DAYS = [
 	"monday",
@@ -41,6 +43,8 @@ const TimeTable = ({
 }) => {
 	const [dates, setDates] = useState<Date[]>(weekDates);
 	const [classes, setClasses] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [existingClass, setExistingClass] = useState(false);
 
 	useEffect(() => {
 		const fetchClasses = async () => {
@@ -62,22 +66,24 @@ const TimeTable = ({
 		};
 		fetchClasses();
 	}, [dates]);
-
-    console.log(classes)
+    
+    
 	return (
 		<SessionContext.Provider value={session}>
+            <CalendarContext.Provider value={{showModal, setShowModal, existingClass, setExistingClass}} >
+            <AddOrEditClassModal />
 			<div className="flex flex-col gap-2">
 				<TableTitleAndButtons setDates={setDates} />
                 <SearchAndAddClass />
 				<div className="border border-slate-500 rounded-xl p-4 overflow-auto">
-					<table className="w-full divide-y divide-slate-300">
+					<table className="w-full border-b border-slate-300 divide-y divide-slate-300">
 						<thead>
 							<tr>
 								<th></th>
 								{dates.map((date, index) => (
 									<th
 										key={index}
-										className="text-sm text-slate-500 uppercase"
+										className="text-xs font-semibold text-slate-500 uppercase"
 									>
 										<p>{DAYS[index]}</p>
 										<p>
@@ -95,12 +101,18 @@ const TimeTable = ({
 									<th className="text-slate-500 border-r border-slate-300 text-sm font-semibold">
 										{time}
 									</th>
-								</tr>
+                                    {dates.map((date, index)=> (
+                                        <td key={index} className="h-[40px] border-r border-slate-300">
+                                            <SelectDate />
+                                        </td>
+                                    ))}
+                                </tr>
 							))}
 						</tbody>
 					</table>
 				</div>
 			</div>
+            </ CalendarContext.Provider >
 		</SessionContext.Provider>
 	);
 };

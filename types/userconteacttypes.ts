@@ -7,6 +7,7 @@ export type TeacherContact = {
     privilege: number,
     grade: string,
     difficulty: number
+    colour: string
     // class
 }
 

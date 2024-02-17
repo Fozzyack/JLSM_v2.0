@@ -64,7 +64,6 @@ export const PUT = async (req: Request) => {
         id,
       ]);
       if (prevBalance - balance * 100 !== 0) {
-          console.log(prevBalance, balance)
           const transactionSql = `
             INSERT INTO  transactions (user_id, amount, manual_user_update_id, prev_balance, new_balance, type) VALUES
             ($1, $2, $3, $4, $5, $6)

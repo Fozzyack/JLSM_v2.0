@@ -12,7 +12,7 @@ export const GET = async (req: Request) => {
       );
 
     const sql = `
-            SELECT u.name as name, u.id, u.email, u.image, u.privilege, g.name as grade, g.difficulty FROM users u
+            SELECT u.colour, u.name as name, u.id, u.email, u.image, u.privilege, g.name as grade, g.difficulty FROM users u
             JOIN grades g
             ON g.id = u.grade_id
             WHERE privilege >= 1 AND verified = true

@@ -1,11 +1,13 @@
 'use client';
 import React from 'react';
-import AddClass from './AddClass';
+import SearchClasses from './SearchClass';
+import AddClassButton from './AddClassButton';
 
 const SearchAndAddClass = () => {
     return (
         <div className="w-full flex flex-row items-center justify-between">
-            <AddClass />
+            <SearchClasses />
+            <AddClassButton />
         </div>
     );
 };
