@@ -5,21 +5,21 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useEffect, useState } from "react";
 // List of random colur hexcodes
 const COLOUR_LIST = [
-	"#ffff00",
-	"#1634cb",
-	"#0bdcdc",
-	"#f4a261",
-	"#2a9d8f",
-	"#f4a261",
-	"#f72585",
-	"#7209b7",
-	"#4cc9f0",
-	"#4361ee",
-	"#7209b7",
-	"#7209b7",
-	"#7209b7",
-	"#7209b7",
-	"#7209b7",
+	"#ff0000",
+	"#ff6100",
+	"#dee014",
+	"#1bd222",
+	"#1bd269",
+	"#1bd298",
+	"#1bcdd2",
+	"#1b92d2",
+	"#1b4cd2",
+	"#331bd2",
+	"#6f1bd2",
+	"#aa1bd2",
+	"#d21bc6",
+	"#d21b8e",
+	"#d21b1b",
 ];
 
 // AddOrEditClassModal component
@@ -36,13 +36,14 @@ const AddOrEditClassModal = () => {
 
 	const handleModalOpen = () => {
 		context.setShowModal((state) => !state);
+		setOpenColours(false);
 	};
 	const handleSelect = (e: any) => {
 		e.preventDefault();
 		setSelectedTeacher(e.target.value);
 		teachers.forEach((teacher) => {
 			if (teacher.id == e.target.value) {
-                console.log(teacher.colour)
+				console.log(teacher.colour);
 				setSelectedColour(teacher.colour);
 			}
 		});
@@ -64,10 +65,9 @@ const AddOrEditClassModal = () => {
 		<AnimatePresence>
 			{context.showModal && (
 				<motion.div
-					initial={{ y: -500 }}
-					exit={{ y: -1000 }}
-					animate={{ y: 0 }}
-					transition={{ stiffness: 1000 }}
+					initial={{ opacity: 0 }}
+					exit={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
 					className="fixed flex flex-col w-full h-full top-0 left-0 items-center justify-center bg-black bg-opacity-50 p-4"
 				>
 					<motion.div
@@ -80,7 +80,7 @@ const AddOrEditClassModal = () => {
 					>
 						<div className="flex justify-between">
 							<h3 className="text-lg text-slate-500 font-semibold">
-                                Add Class
+								Add Class
 							</h3>
 							<button onClick={handleModalOpen}>X</button>
 						</div>
@@ -137,7 +137,8 @@ const AddOrEditClassModal = () => {
 													width: "30px",
 												}}
 											></div>
-											<p> ? </p>
+											<p> ? </p>{" "}
+											{/* Change to svg of a down / up arrow */}
 										</div>
 										<AnimatePresence>
 											{openColours && (
