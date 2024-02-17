@@ -5,7 +5,7 @@ A recreation due to poor design choices
 
 
 ![HeroShiba](https://github.com/Fozzyack/JLSM_v2.0/blob/main/public/landing/HeroShiba.png)
-![HeroShiba](public/Landing/HeroShiba.png)
+![HeroShiba](/public/Landing/HeroShiba.png)
 
 
 ### Features 
