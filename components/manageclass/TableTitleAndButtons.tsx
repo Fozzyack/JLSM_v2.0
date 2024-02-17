@@ -24,19 +24,17 @@ const TableTitleAndButtons = ({
 			<motion.button
 				whileHover={{ scale: 1.06 }}
 				onClick={back}
-				className="w-[80px] rounded-md bg-yellow-500 p-2 text-white"
+				className="w-[30px] h-[30px] flex items-center text-center justify-center rounded-full bg-yellow-500 p-2 text-white"
 			>
-				{" "}
-				Back
+				{"<"}
 			</motion.button>
 			<h3> Organise Classes </h3>
 			<motion.button
 				whileHover={{ scale: 1.06 }}
 				onClick={forward}
-				className="w-[80px] rounded-md bg-yellow-500 p-2 text-white"
+				className="w-[30px] h-[30px] flex items-center text-center justify-center rounded-full bg-yellow-500 p-2 text-white"
 			>
-				{" "}
-				Forward{" "}
+				{">"}
 			</motion.button>
 		</div>
 	);

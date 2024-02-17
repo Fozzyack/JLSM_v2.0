@@ -15,9 +15,11 @@ const getCurrentWeek = () => {
 	} else {
 		monday = new Date(today.getTime() - today.getDay() * day + day);
 	}
+	monday.setUTCHours(0, 0, 0, 0);
 	for (let i = 0; i < 7; i++) {
 		dates.push(new Date(monday.getTime() + day * i));
 	}
+	dates[6].setUTCHours(23, 59, 59, 999);
 	return dates;
 };
 

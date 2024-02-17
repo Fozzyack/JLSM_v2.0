@@ -51,7 +51,6 @@ export const PUT = async (req: Request) => {
     const getPrevBalanceSql = `
             SELECT balance FROM balances
             WHERE user_id = $1
-            RETURNING balance;
     `;
     
     const prevBalance = (await pool.query(getPrevBalanceSql, [id])).rows[0].balance;
@@ -64,12 +63,13 @@ export const PUT = async (req: Request) => {
         balance * 100,
         id,
       ]);
-      if (prevBalance !== balance * 100 ) {
+      if (prevBalance - balance * 100 !== 0) {
+          console.log(prevBalance, balance)
           const transactionSql = `
-            INSERT INTO  transactions (user_id, amount, manual_update_user_id, prev_balance, new_balance) VALUES
-            ($1, $2, $3, $4, $5)
+            INSERT INTO  transactions (user_id, amount, manual_user_update_id, prev_balance, new_balance, type) VALUES
+            ($1, $2, $3, $4, $5, $6)
           `
-          await client.query(transactionSql, [id, balance * 100 - prevBalance, session.user.id, prevBalance, balance * 100])
+          await client.query(transactionSql, [id, balance * 100 - prevBalance, session.user.id, prevBalance, balance * 100, "manual"])
       }
       await client.query("COMMIT");
     } catch (error: any) {

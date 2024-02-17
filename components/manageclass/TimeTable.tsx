@@ -3,6 +3,8 @@ import { ExtendedSession } from "@/types/authtypes";
 import React, { useEffect, useState } from "react";
 import TableTitleAndButtons from "./TableTitleAndButtons";
 import { SessionContext } from "@/hooks/session";
+import AddClass from "./SearchAndAddClass";
+import SearchAndAddClass from "./SearchAndAddClass";
 
 const DAYS = [
 	"monday",
@@ -38,13 +40,35 @@ const TimeTable = ({
 	session: ExtendedSession;
 }) => {
 	const [dates, setDates] = useState<Date[]>(weekDates);
+	const [classes, setClasses] = useState([]);
 
-	useEffect(() => {}, [dates]);
+	useEffect(() => {
+		const fetchClasses = async () => {
+			try {
+				const res = await fetch("/api/classes/getweeklyclasses", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						start: dates[0],
+						end: dates[6],
+					}),
+				});
+				if (!res.ok)
+					throw new Error("There was An Error getting Classes");
+				setClasses(await res.json());
+			} catch (error: any) {
+				console.error(error.message);
+			}
+		};
+		fetchClasses();
+	}, [dates]);
 
+    console.log(classes)
 	return (
 		<SessionContext.Provider value={session}>
 			<div className="flex flex-col gap-2">
 				<TableTitleAndButtons setDates={setDates} />
+                <SearchAndAddClass />
 				<div className="border border-slate-500 rounded-xl p-4 overflow-auto">
 					<table className="w-full divide-y divide-slate-300">
 						<thead>

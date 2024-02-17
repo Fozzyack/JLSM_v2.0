@@ -1,7 +1,7 @@
 "use client";
 import { User } from "@/types/userconteacttypes";
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Role from "../members/Role";
 
 const EditModal = ({ user }: { user: User }) => {
@@ -46,11 +46,20 @@ const EditModal = ({ user }: { user: User }) => {
 			>
 				Edit
 			</button>
+            <AnimatePresence>
 			{showModal && (
-				<div className="fixed  z-20 left-0  top-0 h-full w-full bg-black bg-opacity-50 flex justify-center items-center p-4">
+				<motion.div 
+                initial={{ y: -500}}
+                exit={{ y: -1000}}
+                animate={{ y: 0}}
+                transition={{ stiffness: 1000 }}
+                className="fixed  z-20 left-0 top-0 h-full w-full bg-black bg-opacity-50 flex justify-center items-center p-4">
+
 					<motion.div
 						initial={{ opacity: 0, y: -100 }}
+						exit={{ opacity: 0, y: -100 }}
 						animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 }}
 						className="bg-slate-100 rounded-xl divide-y divide-slate-300 flex flex-col shadow-xl p-5 w-screen md:max-w-[400px]"
 					>
 						<div className="flex justify-between">
@@ -130,8 +139,9 @@ const EditModal = ({ user }: { user: User }) => {
 							</div>
 						</form>
 					</motion.div>
-				</div>
+				</motion.div>
 			)}
+            </AnimatePresence>
 		</div>
 	);
 };
