@@ -18,8 +18,8 @@ const DAYS = [
 	"sunday",
 ];
 const TIMES = [
-	"8:00 - 9:00",
-	"9:00 - 10:00",
+	"08:00 - 09:00",
+	"09:00 - 10:00",
 	"10:00 - 11:00",
 	"11:00 - 12:00",
 	"12:00 - 13:00",
@@ -45,6 +45,8 @@ const TimeTable = ({
 	const [classes, setClasses] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [existingClass, setExistingClass] = useState(false);
+    const [selectedDate, setSelectedDate ] = useState<Date>(dates[0])
+    const [selectedTime, setSelectedTime] = useState<string>('8:00 - 9:00')
 
 	useEffect(() => {
 		const fetchClasses = async () => {
@@ -70,7 +72,7 @@ const TimeTable = ({
     
 	return (
 		<SessionContext.Provider value={session}>
-            <CalendarContext.Provider value={{showModal, setShowModal, existingClass, setExistingClass}} >
+            <CalendarContext.Provider value={{showModal, setShowModal, existingClass, setExistingClass, selectedDate, setSelectedDate, selectedTime, setSelectedTime}} >
             <AddOrEditClassModal />
 			<div className="flex flex-col gap-2">
 				<TableTitleAndButtons setDates={setDates} />
@@ -103,7 +105,7 @@ const TimeTable = ({
 									</th>
                                     {dates.map((date, index)=> (
                                         <td key={index} className="h-[40px] border-r border-slate-300">
-                                            <SelectDate />
+                                            <SelectDate time={time} date={date}/>
                                         </td>
                                     ))}
                                 </tr>

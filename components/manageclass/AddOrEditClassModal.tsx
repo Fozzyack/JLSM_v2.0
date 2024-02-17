@@ -22,6 +22,7 @@ const COLOUR_LIST = [
 	"#d21b1b",
 ];
 
+
 // AddOrEditClassModal component
 // This modal is used to add or edit a class
 // It is used to select a teacher from the list of teachers
@@ -33,10 +34,15 @@ const AddOrEditClassModal = () => {
 	const [selectedTeacher, setSelectedTeacher] = useState<string>("-1");
 	const [selectedColour, setSelectedColour] = useState("#ffff00");
 	const [openColours, setOpenColours] = useState(false);
-
-	const handleModalOpen = () => {
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
+    const [startTime, setStartTime] = useState('')
+    const [endTime, setEndTime] = useState('')
+    console.log(startTime)
+    const handleModalOpen = () => {
 		context.setShowModal((state) => !state);
 		setOpenColours(false);
+        setStartDate('')
 	};
 	const handleSelect = (e: any) => {
 		e.preventDefault();
@@ -59,7 +65,13 @@ const AddOrEditClassModal = () => {
 			setTeachers(await res.json());
 		};
 		fetchTeachers();
-	}, []);
+        setStartDate(context.selectedDate.toISOString().split('T')[0])
+        setEndDate(context.selectedDate.toISOString().split('T')[0])
+        setStartTime(context.selectedTime.split(' - ')[0])
+        setEndTime(context.selectedTime.split(' - ')[1])
+	}, [context.selectedDate, context.selectedTime]);
+
+    console.log(startDate)
 
 	return (
 		<AnimatePresence>
@@ -177,6 +189,14 @@ const AddOrEditClassModal = () => {
 											)}
 										</AnimatePresence>
 									</div>
+								</div>
+								<div className="flex flex-row gap-2 mt-4">
+									<input type="date" value={startDate} onChange={(e) => {setStartDate(e.target.value)}}/>
+									<input type="time" value={startTime} onChange={(e) => {setStartTime(e.target.value)}}/>
+								</div>
+								<div className="flex flex-row gap-2 mt-4">
+									<input type="date" value={endDate} onChange={(e) => {setEndDate(e.target.value)}}/>
+									<input type="time" value={endTime} onChange={(e) => {setEndTime(e.target.value)}}/>
 								</div>
 							</div>
 						</form>
