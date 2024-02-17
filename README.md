@@ -4,7 +4,7 @@ A recreation due to poor design choices
 
 
 
-![HeroShiba]('public/Landing/HeroShiba.png)
+![HeroShiba]('./public/Landing/HeroShiba.png)
 
 
 ### Features 
