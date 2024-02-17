@@ -2,6 +2,7 @@
 import { ExtendedSession } from "@/types/authtypes";
 import React, { useEffect, useState } from "react";
 import TableTitleAndButtons from "./TableTitleAndButtons";
+import { SessionContext } from "@/hooks/session";
 
 const DAYS = [
 	"monday",
@@ -41,40 +42,42 @@ const TimeTable = ({
 	useEffect(() => {}, [dates]);
 
 	return (
-		<div className="flex flex-col gap-2">
-			<TableTitleAndButtons setDates={setDates} />
-			<div className="border border-slate-500 rounded-xl p-4 overflow-auto">
-				<table className="w-full divide-y divide-slate-300">
-					<thead>
-						<tr>
-							<th></th>
-							{dates.map((date, index) => (
-								<th
-									key={index}
-									className="text-sm text-slate-500 uppercase"
-								>
-									<p>{DAYS[index]}</p>
-									<p>
-										{date.toLocaleDateString("en-AU", {
-											timeZone: "UTC",
-										})}
-									</p>
-								</th>
-							))}
-						</tr>
-					</thead>
-					<tbody className="divide-y divide-slate-300">
-						{TIMES.map((time, index) => (
-							<tr key={index}>
-								<th className="text-slate-500 border-r border-slate-300 text-sm font-semibold">
-									{time}
-								</th>
+		<SessionContext.Provider value={session}>
+			<div className="flex flex-col gap-2">
+				<TableTitleAndButtons setDates={setDates} />
+				<div className="border border-slate-500 rounded-xl p-4 overflow-auto">
+					<table className="w-full divide-y divide-slate-300">
+						<thead>
+							<tr>
+								<th></th>
+								{dates.map((date, index) => (
+									<th
+										key={index}
+										className="text-sm text-slate-500 uppercase"
+									>
+										<p>{DAYS[index]}</p>
+										<p>
+											{date.toLocaleDateString("en-AU", {
+												timeZone: "UTC",
+											})}
+										</p>
+									</th>
+								))}
 							</tr>
-						))}
-					</tbody>
-				</table>
+						</thead>
+						<tbody className="divide-y divide-slate-300">
+							{TIMES.map((time, index) => (
+								<tr key={index}>
+									<th className="text-slate-500 border-r border-slate-300 text-sm font-semibold">
+										{time}
+									</th>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
 			</div>
-		</div>
+		</SessionContext.Provider>
 	);
 };
 
