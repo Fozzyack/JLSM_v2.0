@@ -25,7 +25,7 @@ const DashboardLayout = async ({ children }: { children: ReactNode }) => {
     <main className="p-3 bg-black h-screen">
       <div className="rounded-xl  bg-slate-100 md:bg-white h-full">
         <Navbar session={session} />
-        <div className="md:ml-[250px] md:rounded-3xl p-4 md:p-16 bg-slate-100 md:h-full overflow-y-scroll text-black">
+        <div className="md:ml-[210px] md:rounded-3xl p-4 md:p-16 bg-slate-100 md:h-full overflow-y-scroll text-black">
           {children}
         </div>
       </div>

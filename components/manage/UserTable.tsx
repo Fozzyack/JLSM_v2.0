@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import Role from "../members/Role";
 import EditModal from "./EditModal";
 import VerifyUser from "./VerifyUser";
-
+import { motion } from "framer-motion";
 const UsersTable = () => {
 	const [users, setUsers] = useState<User[]>([]);
 
@@ -33,37 +33,37 @@ const UsersTable = () => {
 						</th>
 						<th
 							scope="col"
-							className="text-start text-xs font-medium text-gray-500 uppercase "
+							className="text-center text-xs font-medium text-gray-500 uppercase "
 						>
 							Name
 						</th>
 						<th
 							scope="col"
-							className="text-start text-xs font-medium text-gray-500 uppercase "
+							className=" hidden lg:table-cell text-center text-xs font-medium text-gray-500 uppercase "
 						>
 							Email
 						</th>
 						<th
 							scope="col"
-							className="text-start text-xs font-medium text-gray-500 uppercase "
+							className="hidden lg:table-cell text-center text-xs font-medium text-gray-500 uppercase "
 						>
 							Balance
 						</th>
 						<th
 							scope="col"
-							className="text-start text-xs font-medium text-gray-500 uppercase "
+							className="hidden lg:table-cell text-center text-xs font-medium text-gray-500 uppercase "
 						>
 							Role
 						</th>
 						<th
 							scope="col"
-							className="text-start text-xs font-medium text-gray-500 uppercase "
+							className="hidden lg:table-cell text-center text-xs font-medium text-gray-500 uppercase "
 						>
 							Verified
 						</th>
 						<th
 							scope="col"
-							className="text-start text-xs font-medium text-gray-500 uppercase "
+							className="text-center text-xs font-medium text-gray-500 uppercase "
 						>
 							Edit
 						</th>
@@ -84,33 +84,59 @@ const UsersTable = () => {
 								)}
 							</td>
 							<td className="py-4 whitespace-nowrap px-4">
-								<div className="text-sm font-medium text-gray-900">
-									{user.name}
+								<div className="text-sm flex flex-col gap-1 font-medium text-gray-900">
+									<p> {user.name} </p>
+									<p className="lg:hidden text-slate-600">
+										{" "}
+										{user.email}{" "}
+									</p>
+									<p className="lg:hidden text-slate-600">
+										{" "}
+										{user.privilege === 0
+											? `$${user.balance / 100}`
+											: "N/A"}{" "}
+									</p>
+									<div className="lg:hidden">
+										<Role
+											privilege={user.privilege}
+											place={0}
+										/>
+									</div>
 								</div>
 							</td>
-							<td className="py-4 whitespace-nowrap px-4">
-								<div className="text-sm text-gray-500">
+							<td className="hidden lg:table-cell py-4 whitespace-nowrap px-4">
+								<div className="text-sm text-center text-gray-500">
 									{user.email}
 								</div>
 							</td>
-							<td className="py-4 whitespace-nowrap px-4">
-								<div className="text-sm text-gray-500">
+							<td className="hidden lg:table-cell py-4 whitespace-nowrap px-4">
+								<div className="text-sm text-gray-500 text-center">
 									{user.privilege === 0
 										? `$${user.balance / 100}`
 										: "N/A"}
 								</div>
 							</td>
-							<td className="py-4 whitespace-nowrap text-gray-500 px-4">
-								<Role privilege={user.privilege} place={0} />
+							<td className="hidden lg:table-cell py-4 whitespace-nowrap text-gray-500 px-4">
+								<Role privilege={user.privilege} place={1} />
 							</td>
-							<td className="py-4 whitespace-nowrap text-gray-500 px-4">
-								<VerifyUser
-									id={parseInt(user.id)}
-									verified={user.verified}
-								/>
+							<td className="hidden lg:table-cell py-4 whitespace-nowrap text-gray-500 px-4">
+								<div className="flex justify-center">
+									<VerifyUser
+										id={parseInt(user.id)}
+										verified={user.verified}
+									/>
+								</div>
 							</td>
 							<td className="py-4 whitespace-nowrap px-4 pr-8">
-								<EditModal user={user} />
+								<div className="flex flex-col items-center justify-center">
+									<EditModal user={user} />
+									<div className="lg:hidden">
+										<VerifyUser
+											id={parseInt(user.id)}
+											verified={user.verified}
+										/>
+									</div>
+								</div>
 							</td>
 						</tr>
 					))}

@@ -173,10 +173,10 @@ const NavbarLinks = () => {
 							className={` ml-1 w-full overflow-hidden `}
 						>
 							<div
-								className={`md:pl-4 md:h-16 w-full flex flex-row gap-4 group items-center justify-center md:justify-start ${pathname === link.href ? "text-yellow-500 md:bg-slate-100 md:rounded-l-full md:shadow-inner" : "text-gray-500"} cursor-pointer transition-all duration-500 ease-in-out`}
+								className={`md:pl-4 md:h-12 lg:h-16 w-full flex flex-row gap-4 group items-center justify-center md:justify-start ${pathname === link.href ? "text-yellow-500 md:bg-slate-100 md:rounded-l-full md:shadow-inner" : "text-gray-500"} cursor-pointer transition-all duration-500 ease-in-out`}
 							>
 								<div
-									className={`w-9 h-9 flex items-center justify-center transition-all duration-500 ease-in-out  rounded-full ${pathname === link.href ? "bg-amber-200 shadow-lg" : "group-hover:mb-2 group-hover:shadow-lg"}`}
+									className={`w-9 h-9 flex items-center justify-center transition-all duration-500 ease-in-out  rounded-full ${pathname === link.href ? "bg-amber-200 md:shadow-lg" : "group-hover:mb-2 group-hover:shadow-lg"}`}
 								>
 									{link.svg}
 								</div>

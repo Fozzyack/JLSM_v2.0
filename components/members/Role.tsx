@@ -7,7 +7,7 @@ const ROLE_COLOURS = [
   "bg-red-500",
   "bg-indigo-700",
 ];
-const placement = ["justify-start", "justify-end"];
+const placement = ["justify-start", "justify-center", "justify-end"];
 const Role = ({ privilege, place }: { privilege: number; place: number }) => {
   return (
     <div
