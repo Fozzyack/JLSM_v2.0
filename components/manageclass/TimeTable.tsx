@@ -98,13 +98,13 @@ const TimeTable = ({
 							</tr>
 						</thead>
 						<tbody className="divide-y divide-slate-300">
-							{TIMES.map((time, index) => (
-								<tr key={index}>
+							{TIMES.map((time, timeIdx) => (
+								<tr key={timeIdx}>
 									<th className="text-slate-500 border-r border-slate-300 text-sm font-semibold">
 										{time}
 									</th>
-                                    {dates.map((date, index)=> (
-                                        <td key={index} className="h-[40px] border-r border-slate-300">
+                                    {dates.map((date, dateIdx)=> (
+                                        <td key={dateIdx} className="relative h-[40px] border-r border-slate-300">
                                             <SelectDate time={time} date={date}/>
                                         </td>
                                     ))}
